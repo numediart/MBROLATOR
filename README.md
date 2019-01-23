@@ -63,7 +63,7 @@ character). Although it can be parametrized under mbrola it's looking
 for trouble.
 
 Third source of problems: people sometimes mess up segmentation
-boudaries order, or they write bytes instead of samples — whatever, it
+boundaries order, or they write bytes instead of samples — whatever, it
 will generate an error later.
 
 Fourth source of problems: if diphone **\_-\_** (silence silence) is
@@ -254,7 +254,7 @@ with resynth_resample22_8
 
 It's the hack of the hack... *never* try to replace 16000 parameters
 in your .mbe or .f0 or .syn files, it could make sense, but it's a
-trap. All those programs where handcrafted a very long time ago by
+trap. All those programs were handcrafted a very long time ago by
 Thierry Dutoit and *everything* has been designed for 16000Hz (some
 band pass filters inside, some frequency dependent obscure constants).
 
