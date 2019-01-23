@@ -1,0 +1,4 @@
+Nfft=1024
+Freq=16000
+FrameLength=360
+FrameShift=120

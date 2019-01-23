@@ -1,0 +1,6 @@
+Freq=16000 
+LastPhaseReset=10
+VUVLimTra=0.55
+VUVLimVoiced=1.2
+ElimTrans=5e8
+ElimVoiced=5e8

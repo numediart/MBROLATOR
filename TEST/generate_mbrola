@@ -1,0 +1,15 @@
+echo "Freq= 16000" > $1.f0
+echo "FrameLength= 512" >> $1.f0
+echo "FrameShift= 80" >> $1.f0
+
+echo "Nfft=1024" > $1.mbe
+echo "Freq=16000" >> $1.mbe
+echo "FrameLength=360" >> $1.mbe
+echo "FrameShift=120" >> $1.mbe
+
+echo "Freq=16000 " > $1.syn
+echo "LastPhaseReset=10" >> $1.syn
+echo "VUVLimTra=0.55" >> $1.syn
+echo "VUVLimVoiced=1.2" >> $1.syn
+echo "ElimTrans=5e8" >> $1.syn
+echo "ElimVoiced=5e8" >> $1.syn
