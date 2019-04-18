@@ -1,6 +1,6 @@
 # MBROLA database creation tool
 
-This guide describes how to create voice database for [MBROLA](https://github.com/numediart/MBROLA)
+This guide describes how to create voice database for the [MBROLA](https://github.com/numediart/MBROLA)
 speech synthesizer.
 
 __General steps__
