@@ -43,7 +43,11 @@ char ProgramInfo[]=
 
 #define int8  unsigned char
 #define int16 short
-#define int32 long
+#if defined __i386__ || defined __amd64__
+  #define int32 int
+#else // this is incorrect but I can't be bothered with enumerating every architecture
+  #define int32 long
+#endif
 #define uint16 unsigned short
 
 /* Number of silent frames for the _-_ diphone automatically added */
@@ -96,6 +100,10 @@ void init_compression_curve(double x,double y)
 
 int main(int argc, char **argv)
 {
+  if (sizeof(int32) != 4) {
+    fprintf(stderr, "ERROR: int32 type should be 4 bytes wide, but on your architecture it's %u bytes wide.\n", sizeof(int32));
+    return 1;
+  }
   FILE *dba_in,*dba_out,*raw_out,*pm_out,*tmp,*big_one;
   char *Path, *PathPm, *Version, *dba_name;
   char name_left[255], name_right[255];
@@ -242,7 +250,7 @@ int main(int argc, char **argv)
 	      int t;
 	      j=fread(audio_in, sizeof(short), BUFFER_SIZE, tmp);
 	      indice_raw+=j;
-#ifndef __i386__
+#if defined __powerpc__ || defined __m86k__
 	      swab((char*)audio_in, (char*)audio_in, j*2);
 #endif
 	      for(t=0; t<j ; t++)
@@ -278,7 +286,7 @@ int main(int argc, char **argv)
 		    }
 		}
 
-#ifndef __i386__
+#if defined __powerpc__ || defined __m86k__
 	      swab((char*)audio_out, (char*)audio_out, j*2);
 #endif
 	      fwrite(audio_out, sizeof(short), j, raw_out);
@@ -343,7 +351,7 @@ int main(int argc, char **argv)
 	    }
 
 	  /* LITTLE_ENDIAN is now the standard database format */
-#ifndef __i386__
+#if defined __powerpc__ || defined __m86k__
 	  diphone_table[indice_diphone].halfseg= ((diphone_table[indice_diphone].halfseg&0xFF00)>>8) |
 	    ((diphone_table[indice_diphone].halfseg&0xFF)<<8);
 #endif
@@ -399,7 +407,7 @@ int main(int argc, char **argv)
 	     diphone_table[indice_diphone].nb_frame);
 
       /* LITTLE_ENDIAN is now the standard database format */
-#ifndef __i386__
+#if defined __powerpc__ || defined __m86k__
       diphone_table[indice_diphone].halfseg= ((diphone_table[indice_diphone].halfseg&0xFF00)>>8) |
 	((diphone_table[indice_diphone].halfseg&0xFF)<<8);
 #endif
@@ -492,7 +500,7 @@ int main(int argc, char **argv)
   SizeRaw= indice_raw*2;
   SizeDba= indice_diphone; /*new database format (.2,02)*/
 
-#ifndef __i386__
+#if defined __powerpc__ || defined __m86k__
   SizeDba=((SizeDba&0xFF00)>>8) | ((SizeDba&0xFF)<<8);
 
   SizeMrk=(((SizeMrk&0xFF)<<24) |

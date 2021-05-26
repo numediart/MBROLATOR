@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#ifndef __i386__
+#if defined __powerpc__ || defined __m86k__
 #define SWAP_MACHINE
 #endif
 

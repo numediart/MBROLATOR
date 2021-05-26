@@ -14,10 +14,10 @@ char ProgramInfo[]=
 #include <stdlib.h>
 #include <math.h>
 
-#ifdef __i386__
- #define LITTLE_ENDIAN
-#else
+#if defined __powerpc__ || defined __m86k__
  #define BIG_ENDIAN
+#else
+ #define LITTLE_ENDIAN
 #endif
 
 

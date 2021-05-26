@@ -85,7 +85,7 @@ void RMS_begin_end(char *wave_name, int n_samples, double *RMS_begin,
       exit(1);
     }
   
-#ifndef   __i386__
+#if defined __powerpc__ || defined __m86k__
   swab((char *)buffer,(char *)buffer,sizeof(int16)*n_samples);
 #endif
 
@@ -104,7 +104,7 @@ void RMS_begin_end(char *wave_name, int n_samples, double *RMS_begin,
   fseek(wave_file,file_length-n_samples*sizeof(int16),SEEK_SET);
   fread(buffer,sizeof(int16),n_samples,wave_file);
 
-#ifndef   __i386__
+#if defined __powerpc__ || defined __m86k__
   swab((char *)buffer,(char *)buffer,sizeof(int16)*n_samples);
 #endif
 
@@ -200,7 +200,7 @@ void apply_ratio(char *wave_name, char *out_wave_name, char *pm_name,
   nb_read=fread(buffer,sizeof(int16),BUFFER_SIZE,wave_file);
   nb_pm=fread(pmarks,sizeof(int8),400,pm_file);
 	 
-#ifndef   __i386__
+#if defined __powerpc__ || defined __m86k__
   swab((char *)buffer,(char *)buffer,sizeof(int16)*nb_read);
 #endif
 
@@ -243,7 +243,7 @@ void apply_ratio(char *wave_name, char *out_wave_name, char *pm_name,
       fprintf(stderr,"ERROR in the number of samples of %s file !\n",pm_name );
       exit(1);
     }
-#ifndef   __i386__
+#if defined __powerpc__ || defined __m86k__
   swab((char *)buffer,(char *)buffer,sizeof(int16)*nb_read);
 #endif
   fwrite(buffer,sizeof(int16),nb_read,out_file);
